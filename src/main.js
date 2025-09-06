@@ -22,6 +22,14 @@ document.addEventListener('click', function(e){
     if(e.target.id === "tweet-btn"){
         handleTweetBtnClick()
     }
+
+    if(e.target.dataset.ellipsis) {
+        handleEllipsis(e.target.dataset.ellipsis)
+    }
+
+    if(e.target.dataset.delete){
+        handleDelete(e.target.dataset.delete)
+    }
 })
 
 function handleTweetBtnClick(){
@@ -77,6 +85,21 @@ function handleRetweetClick(tweetId){
     render()
 }
 
+function handleEllipsis(ellipsisId){
+   document.getElementById(`delete-btn-${ellipsisId}`).classList.toggle('show-btn')
+}
+
+function handleDelete(deleteId) {
+    
+    const index = tweetsData.findIndex(tweet => tweet.uuid === deleteId);
+    
+    if (index !== -1) {
+        tweetsData.splice(index, 1); 
+        render(); 
+    }
+    render()
+}
+
 
 function getFeedHtml(){
     let feedHtml = ``
@@ -117,9 +140,19 @@ function getFeedHtml(){
 <div class="tweet">
     <div class="tweet-inner">
         <img src="${tweet.profilePic}" class="profile-pic">
+        
         <div>
-            <p class="handle">${tweet.handle}</p>
+           <div class="tweet-head">
+                <p class="handle">${tweet.handle}</p>
+                <div class="delete-btn-container">
+                    <i class="fa-solid fa-ellipsis-vertical" id="ellipsis" data-ellipsis="${tweet.uuid}"></i>
+                    <div class="delete-btn show-btn" id="delete-btn-${tweet.uuid}" data-delete="${tweet.uuid}">Delete</div>
+                </div>
+                
+           </div>
+            
             <p class="tweet-text">${tweet.tweetText}</p>
+            
             <div class="tweet-details">
                 <span class="tweet-detail">
                     <i class="fa-regular fa-comment-dots"
