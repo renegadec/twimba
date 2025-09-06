@@ -1,4 +1,7 @@
-import { tweetsData } from './data/data.js';
+import './style.css'
+
+// Import the data
+import { tweetsData } from '../public/assets/data/data.js';
 
 const tweetInput = document.getElementById('tweet-input')
 const tweetBtn = document.getElementById('tweet-btn')
