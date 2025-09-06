@@ -28,7 +28,7 @@ color: limegreen;
 /* layout */
 
 main, header{
-  width: 290px;
+  width: 390px;
   margin: 0 auto;
 }
 
@@ -52,6 +52,7 @@ textarea{
   width: 100%;
   font-size: 20px;
   line-height: 30px;
+  resize: none;
 }
 
 button{
@@ -85,7 +86,7 @@ button{
   display: flex;
   font-size: 13px;
   justify-content: space-between;
-  width: 160px;
+  width: 300px;
 }
 
 .tweet-detail{
@@ -108,7 +109,7 @@ button{
 }
 
 .tweet-text{
-  width: 207px;
+  width: 300px;
   font-size: 14px;
   line-height: 20px;
 }

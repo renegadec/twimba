@@ -1,4 +1,5 @@
 import './style.css'
+import { v4 as uuidv4 } from 'uuid';
 
 // Import the data
 import { tweetsData } from '../public/assets/data/data.js';
@@ -7,7 +8,7 @@ const tweetInput = document.getElementById('tweet-input')
 const tweetBtn = document.getElementById('tweet-btn')
 
 tweetBtn.addEventListener('click', function(){
-    console.log(tweetInput.value)
+    handleTweetBtnClick()
 })
 
 document.addEventListener('click', function(e){
@@ -19,6 +20,25 @@ document.addEventListener('click', function(e){
         handleRetweetClick(e.target.dataset.retweet)
     }
 })
+
+function handleTweetBtnClick(){
+    if(tweetInput.value){
+        tweetsData.unshift({
+            handle: `@web3Dev 💎`,
+            profilePic: `/assets/images/scrimbalogo.png`,
+            likes: 0,
+            retweets: 0,
+            tweetText: `${tweetInput.value}`,
+            replies: [],
+            isLiked: false,
+            isRetweeted: false,
+            uuid: uuidv4(),
+        })
+        tweetInput.value = ''
+        render()
+    }
+
+}
 
 function handleLikeClick(tweetId){ 
     
@@ -48,6 +68,10 @@ function handleRetweetClick(tweetId){
     }
     targetTweetObj.isRetweeted = !targetTweetObj.isRetweeted
     render()
+}
+
+function handleReplyClick(tweetId){
+    console.log(tweetId)
 }
 
 function getFeedHtml(){
